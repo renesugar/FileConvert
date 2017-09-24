@@ -1,0 +1,3 @@
+/*
+TODO(renesugar): Discard stub implementation of Catalog/Catalog.h and Catalog/Catalog.cpp when reintegrating with MapD.
+*/

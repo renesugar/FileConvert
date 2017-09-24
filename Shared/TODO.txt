@@ -1,0 +1,18 @@
+/*
+TODO(renesugar): sqltypes.h and Datum.cpp contain changes that need to be checked into MapD when reintegrating.
+
+SanitizeName.h and SanitizeName.cpp are new files that need to be checked into MapD when reintegrating.
+
+HalfFloat.h and HalfFloat.cpp are new files that need to be checked into MapD when reintegrating.
+
+
+Testing of SQL
+
+https://everythingisdata.wordpress.com/2006/03/03/march-03-2006/
+
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.56.9088&rep=rep1&type=pdf
+
+https://korte.credativ.com/~ase/sqlsmith-talk.pdf
+
+https://github.com/anse1/sqlsmith
+*/

@@ -1,0 +1,5 @@
+/*
+TODO(renesugar): Move none_encoded_null_value in DataMgr.h/NoneEncoder.h to Shared/sqltypes.h when reintegrating with MapD.
+
+import/DataMgr/DataMgr.h and import/DataMgr/DataMgr.cpp are stub implementations to be discarded when reintegrating with MapD.
+*/

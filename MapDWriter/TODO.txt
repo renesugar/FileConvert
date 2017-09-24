@@ -1,0 +1,31 @@
+/*
+TODO(renesugar): clang-tidy reports a divide-by-zero error.
+
+FileConvert/MapDWriter/MapDWriter.cpp:141:28: warning: Division by zero [clang-analyzer-core.DivideZero]
+    const auto shard = val % shard_count;
+                           ^
+FileConvert/MapDWriter/MapDWriter.cpp:112:30: note: Assuming 'shard_idx' is >= 'shard_count'
+  for (size_t shard_idx = 0; shard_idx < shard_count; ++shard_idx) {
+                             ^
+FileConvert/MapDWriter/MapDWriter.cpp:112:3: note: Loop condition is false. Execution continues on line 119
+  for (size_t shard_idx = 0; shard_idx < shard_count; ++shard_idx) {
+  ^
+FileConvert/MapDWriter/MapDWriter.cpp:124:5: note: Taking true branch
+    if (col_idx == table_desc->shardedColumnId) {
+    ^
+FileConvert/MapDWriter/MapDWriter.cpp:126:7: note:  Execution continues on line 129
+      break;
+      ^
+FileConvert/MapDWriter/MapDWriter.cpp:134:3: note: Taking false branch
+  if (shard_col_ti.is_string()) {
+  ^
+FileConvert/MapDWriter/MapDWriter.cpp:139:22: note: Assuming 'i' is < 'row_count'
+  for (size_t i = 0; i < row_count; ++i) {
+                     ^
+FileConvert/MapDWriter/MapDWriter.cpp:139:3: note: Loop condition is true.  Entering loop body
+  for (size_t i = 0; i < row_count; ++i) {
+  ^
+FileConvert/MapDWriter/MapDWriter.cpp:141:28: note: Division by zero
+    const auto shard = val % shard_count;
+*/
+                           ^
