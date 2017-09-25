@@ -31,7 +31,7 @@
 #include <arrow/api.h>
 // Defines in arrow/util/logging.h redefine macros in glog/logging.h
 //#define ARROW_UTIL_LOGGING_H
-#include <arrow/util/int128.h>
+#include <arrow/util/decimal.h>
 
 #include <string>
 #include <vector>
@@ -839,7 +839,7 @@ public:
        ('kTIME',      'Time64Type',    'Time64Builder',      'time',         'time_t',       'int64_t',       'identity'),
        ('kTIMESTAMP', 'TimestampType', 'TimestampBuilder',   'time',         'time_t',       'int64_t',       'identity'),
        ('kDATE',      'Date64Type',    'Date64Builder',      'time',         'time_t',        'time_t',       'identity'),
-       ('kDECIMAL',   'DecimalType',   'DecimalBuilder',     'bigint',      'int64_t',        '::arrow::Int128',       '*'),
+       ('kDECIMAL',   'DecimalType',   'DecimalBuilder',     'bigint',      'int64_t',        '::arrow::Decimal128',       '*'),
        ]
        
        for sql_type, arrow_type, arrow_builder, type_array, c_type, cast_type, cast_function in types:
@@ -851,7 +851,7 @@ public:
          elif sql_type == 'kTIMESTAMP':
            cog.outl('  ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, %s_buffer_, builder, [](%s v) -> %s { return (UINT64_C(1000000) * v); });' % (arrow_type, c_type, cast_type, type_array, c_type, cast_type))
          elif sql_type == 'kDECIMAL':
-           cog.outl('  ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, %s_buffer_, builder, [](%s v) -> %s { return ::arrow::Int128(v); });' % (arrow_type, c_type, cast_type, type_array, c_type, cast_type))
+           cog.outl('  ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, %s_buffer_, builder, [](%s v) -> %s { return ::arrow::Decimal128(v); });' % (arrow_type, c_type, cast_type, type_array, c_type, cast_type))
          else:
            cog.outl('  ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, %s_buffer_, builder, [](%s v) -> %s { return (v); });' % (arrow_type, c_type, cast_type, type_array, c_type, cast_type))
          cog.outl('  ARROW_RETURN_NOT_OK(s);')
@@ -909,7 +909,7 @@ public:
         break;
       }
       case kDECIMAL: {
-        ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::DecimalType, int64_t, ::arrow::Int128>(start_index, end_index, bigint_buffer_, builder, [](int64_t v) -> ::arrow::Int128 { return ::arrow::Int128(v); });
+        ::arrow::Status s = copy_scalar_to_arrow_builder<::arrow::DecimalType, int64_t, ::arrow::Decimal128>(start_index, end_index, bigint_buffer_, builder, [](int64_t v) -> ::arrow::Decimal128 { return ::arrow::Decimal128(v); });
         ARROW_RETURN_NOT_OK(s);
         break;
       }
@@ -992,7 +992,7 @@ public:
              ('kTIME',      'Time64Type',    'Time64Builder',      'time',         'time_t',       'int64_t',       'identity'),
              ('kTIMESTAMP', 'TimestampType', 'TimestampBuilder',   'time',         'time_t',       'int64_t',       'identity'),
              ('kDATE',      'Date64Type',    'Date64Builder',      'time',         'time_t',        'time_t',       'identity'),
-             ('kDECIMAL',   'DecimalType',   'DecimalBuilder',     'bigint',      'int64_t',        '::arrow::Int128',       '*'),
+             ('kDECIMAL',   'DecimalType',   'DecimalBuilder',     'bigint',      'int64_t',        '::arrow::Decimal128',       '*'),
              ]
 
              for sql_type, arrow_type, arrow_builder, type_array, c_type, cast_type, cast_function in types:
@@ -1004,7 +1004,7 @@ public:
                elif sql_type == 'kTIMESTAMP':
                  cog.outl('  ::arrow::Status s = copy_array_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, array_buffer_, builder, [](%s v) -> %s { return (UINT64_C(1000000) * v); });' % (arrow_type, c_type, cast_type, c_type, cast_type))
                elif sql_type == 'kDECIMAL':
-                 cog.outl('  ::arrow::Status s = copy_array_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, array_buffer_, builder, [](%s v) -> %s { return ::arrow::Int128(v); });' % (arrow_type, c_type, cast_type, c_type, cast_type))
+                 cog.outl('  ::arrow::Status s = copy_array_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, array_buffer_, builder, [](%s v) -> %s { return ::arrow::Decimal128(v); });' % (arrow_type, c_type, cast_type, c_type, cast_type))
                else:
                  cog.outl('  ::arrow::Status s = copy_array_to_arrow_builder<::arrow::%s, %s, %s>(start_index, end_index, array_buffer_, builder, [](%s v) -> %s { return (v); });' % (arrow_type, c_type, cast_type, c_type, cast_type))
                cog.outl('  ARROW_RETURN_NOT_OK(s);')
@@ -1062,7 +1062,7 @@ public:
               break;
             }
             case kDECIMAL: {
-              ::arrow::Status s = copy_array_to_arrow_builder<::arrow::DecimalType, int64_t, ::arrow::Int128>(start_index, end_index, array_buffer_, builder, [](int64_t v) -> ::arrow::Int128 { return ::arrow::Int128(v); });
+              ::arrow::Status s = copy_array_to_arrow_builder<::arrow::DecimalType, int64_t, ::arrow::Decimal128>(start_index, end_index, array_buffer_, builder, [](int64_t v) -> ::arrow::Decimal128 { return ::arrow::Decimal128(v); });
               ARROW_RETURN_NOT_OK(s);
               break;
             }
