@@ -29,6 +29,8 @@ See MapD Core [README](https://github.com/mapd/mapd-core/blob/master/README.md)
 
 # Using
 
+(See https://issues.apache.org/jira/browse/PARQUET-1114 for versions of Arrow and Parquet-Cpp with necessary fixes.)
+
 The basic command line to convert a file from one type to another is:
 
 FileConvert -i ./file.csv -o ./file.parquet
