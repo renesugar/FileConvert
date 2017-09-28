@@ -26,25 +26,23 @@ shift
 APPLY_STEP=$1
 shift
 
-# clang format will only find its configuration if we are in
-# the source tree or in a path relative to the source tree
 if [ "$APPLY_STEP" == "1" ]; then
-$INFER capture --compilation-database $COMPILE_COMMANDS
-echo ""
-echo "Run 'make infer-analyze' next."
+  $INFER capture --compilation-database $COMPILE_COMMANDS
+  echo ""
+  echo "Run 'make infer-analyze' next."
 elif [ "$APPLY_STEP" == "2" ]; then
-# infer's analyze step can take a very long time to complete
-$INFER analyze
-echo ""
-echo "Run 'make infer-report' next."
-echo "See: http://fbinfer.com/docs/steps-for-ci.html"
+  # infer's analyze step can take a very long time to complete
+  $INFER analyze
+  echo ""
+  echo "Run 'make infer-report' next."
+  echo "See: http://fbinfer.com/docs/steps-for-ci.html"
 elif [ "$APPLY_STEP" == "3" ]; then
-$INFER report --issues-csv ./infer-out/report.csv 1> /dev/null
-$INFER report --issues-txt ./infer-out/report.txt 1> /dev/null
-$INFER report --issues-json ./infer-out/report.json 1> /dev/null
-echo ""
-echo "Reports (report.txt, report.csv, report.json) can be found in the infer-out subdirectory."
+  $INFER report --issues-csv ./infer-out/report.csv 1> /dev/null
+  $INFER report --issues-txt ./infer-out/report.txt 1> /dev/null
+  $INFER report --issues-json ./infer-out/report.json 1> /dev/null
+  echo ""
+  echo "Reports (report.txt, report.csv, report.json) can be found in the infer-out subdirectory."
 else
-echo ""
-echo "See: http://fbinfer.com/docs/steps-for-ci.html"
+  echo ""
+  echo "See: http://fbinfer.com/docs/steps-for-ci.html"
 fi
