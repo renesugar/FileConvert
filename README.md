@@ -81,20 +81,20 @@ Make targets have been added to run the **infer** steps.
 Other ways to use **infer** can be found in the article [Recommended flow for CI](http://fbinfer.com/docs/steps-for-ci.html).
 
 
-    1. First run the capture step using:
+1. First run the capture step using:
+```
+make infer
+```
+2. Next, run the analyze step using:
+```
+make infer-analyze
+```
+Note: The analyze step can take a very long time.
 
-    make infer
-
-    2. Next, run the analyze step using:
-
-    make infer-analyze
-
-    Note: The **analyze** step can take a very long time.
-
-    3. Next, run the report step using:
-
-    make infer-report
-
+3. Next, run the report step using:
+```
+make infer-report
+```
 
 # Using
 
