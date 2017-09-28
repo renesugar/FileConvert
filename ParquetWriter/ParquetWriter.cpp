@@ -214,7 +214,7 @@ bool ParquetWriter::addRows(const std::vector<std::unique_ptr<TypedImportBuffer>
   std::vector<int> importColumnIndex;
 
   // All TypedImportBuffer's have the same number of elements
-  int num_rows = import_buffers[0]->size();
+  int num_rows = (import_buffers.empty() ? 0 : import_buffers[0]->size());
   int num_cols = get_column_descs().size();
   int col_idx  = 0;
 

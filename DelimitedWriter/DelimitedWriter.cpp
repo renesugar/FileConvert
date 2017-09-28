@@ -109,7 +109,7 @@ bool DelimitedWriter::addRows(
   }
 
   // All TypedImportBuffer's have the same number of elements
-  int num_rows   = import_buffers[0]->size();
+  int num_rows   = (import_buffers.empty() ? 0 : import_buffers[0]->size());
   int import_idx = 0;
 
   if (copy_params_.has_header) {
