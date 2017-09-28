@@ -89,7 +89,7 @@ Other ways to use **infer** can be found in the article [Recommended flow for CI
 
     make infer-analyze
 
-    (Note: The *analyze* step can take a very long time.)
+    Note: The **analyze** step can take a very long time.
 
     3. Next, run the report step using:
 
